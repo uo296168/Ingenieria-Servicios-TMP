@@ -90,3 +90,4 @@ def save_amigo():
         db.session.commit()
 
     return redirect(url_for("html.tabla_amigos"))
+

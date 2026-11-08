@@ -1,6 +1,6 @@
 FROM python:3.13-slim
 
-RUN pip install --no-cache-dir flask gunicorn flask-sqlalchemy pymysql flask-migrate
+RUN pip install --no-cache-dir flask gunicorn flask-sqlalchemy pymysql flask-migrate prometheus-client
 
 WORKDIR /amigos
 
