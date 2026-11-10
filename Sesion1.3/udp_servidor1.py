@@ -1,16 +1,20 @@
-import sys
 import socket
+import sys
 
-if(len(sys.argv) != 2):
-    print("No se ha introducido el puerto, puerto por defecto 5000")
-    port = 9999
+if len(sys.argv) != 2:
+    print("Usando el puerto 9999 por defecto")
+    puerto = 9999
 else:
-    port = int(sys.argv[1])
+    puerto = int(sys.argv[1])
 
 s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-s.bind(('localhost', port))
+s.bind(("", puerto))
+
 while True:
-    data, addr = s.recvfrom(1024)
-    print("Recibido: ", data.decode(), " desde: ", addr)
-s.close()   
+    datagrama, origen = s.recvfrom(1024) #1024 es el máximo tamaño esperado
+    print("Se ha recibido un datagrama desde desde", origen)
+    print("Contiene lo siguiente: ")
+    print(datagrama.decode("utf-8"))
+    s.sendto(datagrama, origen)
+
 

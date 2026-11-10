@@ -1,17 +1,20 @@
-import sys
 import socket
-
-if(len(sys.argv) != 3):
-    print("No se ha introducido la IP y el puerto, IP por defecto localhost y puerto por defecto 5000")
-    ip = 'localhost'
-    port = 9999
-else:
-    ip = sys.argv[1]
-    port = int(sys.argv[2])
+import sys
 
 s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-msg = input("Introduce el mensaje a enviar: ")
 
-while(msg != "FIN"):
-    s.sendto(msg.encode(), (ip, port))
-    msg = input("Introduce el mensaje a enviar: ")  
+if len(sys.argv) != 3:
+    print("Usando el puerto 9999 por defecto e ip localhost")
+    puerto = 9999
+    ip = "localhost"
+else:
+    puerto = int(sys.argv[1])
+    ip = sys.argv[2]
+
+print("Introduce mensaje: ")
+msg = input()
+while msg != "FIN":
+    s.sendto(msg.encode(), (ip, puerto))
+    msg = input()
+
+s.sendto(msg.encode(), (ip, puerto))
